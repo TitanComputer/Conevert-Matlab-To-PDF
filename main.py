@@ -17,13 +17,22 @@ except Exception:
     SHAPING_AVAILABLE = False
 
 ENCODINGS_TO_TRY = ["utf-8", "utf-8-sig", "cp1256", "cp1252", "latin-1"]
+APP_VERSION = "1.0.0"
 
 
 class BatchMatlabToPdfApp(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.title("Batch Folder -> PDF")
-        self.geometry("700x160")
+        self.title(f"Batch Folder -> PDF v{APP_VERSION}")
+        self.update_idletasks()
+        width = 500
+        height = 160
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        x = (screen_width // 2) - (width // 2)
+        y = (screen_height // 2) - (height // 2)
+        self.geometry(f"{width}x{height}+{x}+{y}")
+        self.resizable(False, False)
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("dark-blue")
 
@@ -88,7 +97,7 @@ class BatchMatlabToPdfApp(ctk.CTk):
             registered_font = False
             try:
                 # try typical locations or just rely on system installation path
-                pdfmetrics.registerFont(TTFont("DejaVuSans", "DejaVuSans.ttf"))
+                pdfmetrics.registerFont(TTFont("DejaVuSans", "assets/DejaVuSans.ttf"))
                 font_name = "DejaVuSans"
                 registered_font = True
             except Exception:
