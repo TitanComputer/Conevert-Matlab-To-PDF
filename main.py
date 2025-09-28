@@ -6,6 +6,7 @@ import customtkinter as ctk
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
+from PIL import ImageTk
 
 # optional libs for better Arabic/Persian shaping
 try:
@@ -24,6 +25,10 @@ class BatchMatlabToPdfApp(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title(f"Batch Folder -> PDF v{APP_VERSION}")
+        self.iconpath = ImageTk.PhotoImage(file=self.resource_path(os.path.join("assets", "icon.png")))
+        self.wm_iconbitmap()
+        self.iconphoto(False, self.iconpath)
+        self.update_idletasks()
         self.update_idletasks()
         width = 500
         height = 160
@@ -39,6 +44,10 @@ class BatchMatlabToPdfApp(ctk.CTk):
         self.folder_var = ctk.StringVar()
 
         self._build_ui()
+
+    def resource_path(self, relative_path):
+        temp_dir = os.path.dirname(__file__)
+        return os.path.join(temp_dir, relative_path)
 
     def _build_ui(self):
         frame = ctk.CTkFrame(self, corner_radius=8)
@@ -97,7 +106,9 @@ class BatchMatlabToPdfApp(ctk.CTk):
             registered_font = False
             try:
                 # try typical locations or just rely on system installation path
-                pdfmetrics.registerFont(TTFont("DejaVuSans", "assets/DejaVuSans.ttf"))
+                pdfmetrics.registerFont(
+                    TTFont("DejaVuSans", self.resource_path(os.path.join("assets", "DejaVuSans.ttf")))
+                )
                 font_name = "DejaVuSans"
                 registered_font = True
             except Exception:
