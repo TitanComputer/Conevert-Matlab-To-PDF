@@ -1,0 +1,8 @@
+arabic-reshaper==3.0.0
+charset-normalizer==3.4.3
+customtkinter==5.2.2
+darkdetect==0.8.0
+packaging==25.0
+pillow==11.3.0
+python-bidi==0.6.6
+reportlab==4.4.4
