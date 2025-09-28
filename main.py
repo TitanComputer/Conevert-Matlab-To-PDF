@@ -120,9 +120,9 @@ class BatchMatlabToPdfApp(ctk.CTk):
 
             left_margin = 40
             top_margin = page_height - 40
-            line_height = 12
-            font_size_title = 14  # filename
-            font_size_code = 11  # code lines
+            line_height = 14
+            font_size_title = 15  # filename
+            font_size_code = 12  # code lines
 
             y = top_margin
 
